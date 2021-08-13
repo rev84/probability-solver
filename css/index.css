@@ -1,0 +1,43 @@
+* {
+  word-break: break-all;
+}
+
+#bernoulli .config input {
+  width: 80px;
+  text-align: right;
+}
+
+.result {
+  font-size: 200%;
+}
+
+#bernoulli .method {
+  font-size: 50%;
+}
+
+.no_display {
+  display: none;
+}
+
+.fraction_number {
+  display: inline-block;
+  vertical-align: -0.6em;
+  text-align: center;
+  font-size: 1em;
+  line-height: 1.2em;
+}
+  
+.fraction_child, .fraction_mother {
+  display: block;
+  padding: 0 0.3em;
+  margin: 0px 0.2em 0px 0.05em;
+}
+  
+.fraction_child {
+  line-height:1.0em;
+}
+  
+.fraction_mother {
+  line-height:1.2em;
+  border-top: solid 0.075em;
+}

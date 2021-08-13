@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>確率計算ツール</title>
+
+<link href="flat-ui/css/vendor/bootstrap.min.css" rel="stylesheet">
+<link href="flat-ui/css/flat-ui.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="flat-ui/scripts/flat-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js" integrity="sha512-OZ6CXzl5JrSc9OM1lxp1OC+zt5gCTVAqy7nWwbdSUE98akAvGl/20WaIqsRUnSpBG+QBkcMkiJVfFvybZ6PtKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" type="text/css" href="./css/index.css">
+<script src="js/decimal.js"></script>
+<script src="js/index.js"></script>
+
+<link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed navbar-expand-lg">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">確率計算ツール</a>
+      </div>
+      <div id="top-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="switch_active"></a>
+            <span class="dropdown-arrow"></span>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" id="switch_bernoulli">●回以上起こる確率</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div id="bernoulli" class="all_mode">
+      <div class="config">
+        <div class="form-inline">
+          <span class="cond1 prob">
+            <input type="number" class="cond1_prob form-control input-sm" value="50" />
+          </span>
+          <span class="cond1 freq">
+            <input type="number" class="cond1_freq_mother form-control input-sm" value="10" />
+          </span>
+          <select class="cond1 form-control input-sm">
+            <option value="prob">％</option>
+            <option value="freq">回</option>
+          </select>
+          <span class="cond1 prob">
+            で起こる
+          </span>
+          <span class="cond1 freq">
+            に
+            <input type="number" class="cond1_freq_child form-control input-sm" value="5" />回の割合で起こる
+          </span>
+
+          ことが
+        </div>
+
+        <div class="form-inline">
+          <input type="number" class="try_count form-control input-sm" value="10" />回やって
+
+          <span class="cond2 prob">
+            <input type="number" class="cond2_prob form-control input-sm" value="50" />
+          </span>
+          <span class="cond2 freq">
+            <input type="number" class="cond2_freq form-control input-sm" value="5" />
+          </span>
+          <select class="cond2 form-control input-sm">
+            <option value="prob">％</option>
+            <option value="freq">回</option>
+          </select>
+          <span class="cond2 prob">
+            <select class="cond3 prob form-control input-sm">
+              <option value="down">以下</option>
+              <option value="up">以上</option>
+            </select>
+          </span>
+          <span class="cond2 freq">
+            <select class="cond3 freq form-control input-sm">
+              <option value="down">以下</option>
+              <option value="up">以上</option>
+              <option value="just">ちょうど</option>
+            </select>
+          </span>        
+          起こる確率を
+          <button class="btn btn-lg btn-primary start">調べる</button>
+          &nbsp;
+          <button class="btn btn-lg btn-info tweet" class="tweet">
+            <span class="fui-twitter"></span>
+            この計算を共有
+          </button>
+        </div>
+      </div>
+
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8523455066091917"
+      crossorigin="anonymous"></script>
+      <!-- 確率計算ツール -->
+      <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-8523455066091917"
+            data-ad-slot="8465948961"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+      <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+      <div>
+        <div class="result"></div>
+        <div class="fraction"></div>
+        <div class="method"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

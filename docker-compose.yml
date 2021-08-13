@@ -1,0 +1,9 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:1.15
+    ports:
+      - "12346:80"
+    volumes:
+      - ./public_html:/usr/share/nginx/html
+    tty: true
