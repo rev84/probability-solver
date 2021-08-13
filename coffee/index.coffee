@@ -182,6 +182,7 @@ bernoulli_normal = (p, n, x, mode)->
     
   for i in ary
     c = math.combinations(n.toNumber(), i)
+    c = if isNaN(c) then combi_memorized(n.toNumber(), i) else c
     sum = sum.add p.pow(i).mul(Decimal(1).sub(p).pow(n.sub(i))).mul(c)
   if is_reverse then Decimal(1).sub(sum) else sum
 
@@ -280,3 +281,16 @@ tweet = (content, hashTag = null, url = null, w = 575, h = 400)->
   accessUrl = 'https://twitter.com/share?url='+url+'&text='+text
   w = window.open(accessUrl, '', 'scrollbars=yes,Width='+w+',Height='+h)
   w.focus()
+
+window.memo_combi = {}
+combi_memorized = (n, k) ->
+  if k * 2 > n
+    k = n - k
+  if k == 0
+    return 1
+  if k == 1
+    return n
+  memo_key = n + ',' + k
+  if !memo_combi[memo_key]
+    memo_combi[memo_key] = combi_memorized(n - 1, k) + combi_memorized(n - 1, k - 1)
+  memo_combi[memo_key]
