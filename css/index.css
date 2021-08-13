@@ -6,8 +6,10 @@
   width: 80px;
   text-align: right;
 }
-
-.result {
+#bernoulli .progress {
+  margin-top: 20px;
+}
+#bernoulli .result {
   font-size: 200%;
 }
 

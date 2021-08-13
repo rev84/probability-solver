@@ -94,6 +94,7 @@ bernoulli_start = ->
       $('#bernoulli .cond3.freq').eq(0).val()
 
   [res, is_std] = bernoulli(p, n, x, mode)
+  $('#bernoulli .progress-bar').css('width', ''+res.mul(100).ceil().toFixed()+'%')
   $('#bernoulli .result').html(
     ''+format_log_fixed(res.mul(100).toFixed())+'％'
   )
@@ -239,6 +240,15 @@ format_log_fixed = (str)->
     cnt++ if s isnt '0' and s isnt '.'
     break if cnt >= 3
   res
+
+progress_bar_html = (value)->
+  $('<div>').addClass('progress-bar progress-bar-striped progress-bar-animated')
+  .attr({
+    role: 'progressbar'
+    ariaValuenow: value
+    ariaValuemin: '0'
+    ariaValuemax: '100'
+  })
 
 tweet = (content, hashTag = null, url = null, w = 575, h = 400)->
   text = encodeURIComponent content+(if hashTag is null then '' else ' #'+hashTag)
