@@ -3,7 +3,7 @@ $().ready ->
     precision: 500
   }
   $('#switch_bernoulli').on 'click', ->
-    switch_bernoulli()
+    bernoulli_switch()
   switch_mode(window.location.search.substring(1))
   bernoulli_init()
 
@@ -12,13 +12,13 @@ switch_mode = (arg)->
   [mode, arg] = arg.split('&')
   switch mode
     when 'bernoulli'
-      switch_bernoulli(arg)
+      bernoulli_switch(arg)
     else
-      switch_bernoulli()
+      bernoulli_switch()
   
 
-decode_bernoulli = (arg)->
-  [c1, c1_p, c1_fm, c1_fc, try_count, c2, c2_p, c2_f, c3_p, c3_f] = arg.split('_')
+bernoulli_decode = (arg)->
+  [c1, c1_p, c1_fm, c1_fc, try_count, c2, c2_p, c2_f, c3_p, c3_f, title] = arg.split('_')
   $('#bernoulli select.cond1').val(if c1 is 'p' then 'prob' else 'freq')
   $('#bernoulli select.cond2').val(if c2 is 'p' then 'prob' else 'freq')
   $('#bernoulli select.cond3.prob').val(if c3_p is 'd' then 'down' else if c3_p is 'u' then 'up' else 'just')
@@ -29,8 +29,10 @@ decode_bernoulli = (arg)->
   $('#bernoulli input.try_count').val(try_count)
   $('#bernoulli input.cond2_prob').val(c2_p)
   $('#bernoulli input.cond2_freq').val(c2_f)
+  $('#bernoulli .title_view').val(title)
+  $('#bernoulli .title_input').val(title)
 
-encode_bernoulli = ->
+bernoulli_encode = ->
   res = []
   res.push if $('#bernoulli select.cond1').val() is 'prob' then 'p' else 'f'
   res.push $('#bernoulli input.cond1_prob').val()
@@ -42,16 +44,17 @@ encode_bernoulli = ->
   res.push $('#bernoulli input.cond2_freq').val()
   res.push if $('#bernoulli select.cond3.prob').val() is 'down' then 'd' else if $('#bernoulli select.cond3.prob').val() is 'up' then 'u' else 'j'
   res.push if $('#bernoulli select.cond3.freq').val() is 'down' then 'd' else if $('#bernoulli select.cond3.freq').val() is 'up' then 'u' else 'j'
+  res.push encodeURIComponent($('#bernoulli .title_view').html())
   res.join('_')
 
-tweet_bernoulli = ->
-  tweet '', '確率計算ツール', '?bernoulli&'+encode_bernoulli()
+bernoulli_tweet = ->
+  tweet $('#bernoulli title_view').val(), '確率計算ツール', '?bernoulli&'+bernoulli_encode()
 
-switch_bernoulli = (arg = null)->
+bernoulli_switch = (arg = null)->
   $('#switch_active').html('●回以上起こる確率')
   $('.all_mode').addClass('no_display')
   if arg and (arg.match(/_/g) || [] ).length >= 9
-    decode_bernoulli(arg)
+    bernoulli_decode(arg)
     bernoulli_start()
 
   $('#bernoulli').removeClass('no_display')
@@ -71,7 +74,24 @@ bernoulli_init = ->
   bernoulli_cond2.bind($('#bernoulli select.cond2').eq(0))()
 
   $('#bernoulli .start').on 'click', bernoulli_start
-  $('#bernoulli .tweet').on 'click', tweet_bernoulli
+  $('#bernoulli .tweet').on 'click', bernoulli_tweet
+  $('#bernoulli .title_edit').on 'click', bernoulli_title_edit
+  $('#bernoulli .title_save').on 'click', bernoulli_title_save
+  bernoulli_title_save()
+
+bernoulli_title_edit = ->
+  $('#bernoulli .title_input').val $('#bernoulli title_view').val()
+  $('#bernoulli .title_view').addClass('no_display')
+  $('#bernoulli .title_input').removeClass('no_display')
+  $('#bernoulli .title_save').removeClass('no_display')
+  $('#bernoulli .title_edit').addClass('no_display')
+
+bernoulli_title_save = ->
+  $('#bernoulli .title_view').html $('#bernoulli .title_input').val()
+  $('#bernoulli .title_view').removeClass('no_display')
+  $('#bernoulli .title_input').addClass('no_display')
+  $('#bernoulli .title_save').addClass('no_display')
+  $('#bernoulli .title_edit').removeClass('no_display')
 
 bernoulli_start = ->
   bernoulli_value = (class_name) ->

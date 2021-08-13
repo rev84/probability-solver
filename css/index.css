@@ -17,8 +17,12 @@
   font-size: 50%;
 }
 
+h1 {
+  font-size: 40px;
+}
+
 .no_display {
-  display: none;
+  display: none !important;
 }
 
 .fraction_number {
