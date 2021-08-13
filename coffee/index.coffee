@@ -45,7 +45,7 @@ encode_bernoulli = ->
   res.join('_')
 
 tweet_bernoulli = ->
-  tweet '', '確率計算ツール', location.pathname+'?bernoulli&'+encode_bernoulli()
+  tweet '', '確率計算ツール', '?bernoulli&'+encode_bernoulli()
 
 switch_bernoulli = (arg = null)->
   $('#switch_active').html('●回以上起こる確率')
@@ -245,7 +245,7 @@ tweet = (content, hashTag = null, url = null, w = 575, h = 400)->
   if url is null
     url = encodeURIComponent location.href
   else
-    url = encodeURIComponent url
+    url = encodeURIComponent location.protocol+'//'+location.host+location.pathname+url
   accessUrl = 'https://twitter.com/share?url='+url+'&text='+text
   w = window.open(accessUrl, '', 'scrollbars=yes,Width='+w+',Height='+h)
   w.focus()

@@ -55,7 +55,7 @@ encode_bernoulli = function() {
 };
 
 tweet_bernoulli = function() {
-  return tweet('', '確率計算ツール', location.pathname + '?bernoulli&' + encode_bernoulli());
+  return tweet('', '確率計算ツール', '?bernoulli&' + encode_bernoulli());
 };
 
 switch_bernoulli = function(arg = null) {
@@ -290,7 +290,7 @@ tweet = function(content, hashTag = null, url = null, w = 575, h = 400) {
   if (url === null) {
     url = encodeURIComponent(location.href);
   } else {
-    url = encodeURIComponent(url);
+    url = encodeURIComponent(location.protocol + '//' + location.host + location.pathname + url);
   }
   accessUrl = 'https://twitter.com/share?url=' + url + '&text=' + text;
   w = window.open(accessUrl, '', 'scrollbars=yes,Width=' + w + ',Height=' + h);
