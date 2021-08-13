@@ -26,6 +26,7 @@ switch_mode = function(arg) {
 bernoulli_decode = function(arg) {
   var c1, c1_fc, c1_fm, c1_p, c2, c2_f, c2_p, c3_f, c3_p, title, try_count;
   [c1, c1_p, c1_fm, c1_fc, try_count, c2, c2_p, c2_f, c3_p, c3_f, title] = arg.split('_');
+  title = decodeURIComponent(title);
   $('#bernoulli select.cond1').val(c1 === 'p' ? 'prob' : 'freq');
   $('#bernoulli select.cond2').val(c2 === 'p' ? 'prob' : 'freq');
   $('#bernoulli select.cond3.prob').val(c3_p === 'd' ? 'down' : c3_p === 'u' ? 'up' : 'just');
@@ -58,7 +59,7 @@ bernoulli_encode = function() {
 };
 
 bernoulli_tweet = function() {
-  return tweet($('#bernoulli title_view').val(), '確率計算ツール', '?bernoulli&' + bernoulli_encode());
+  return tweet($('#bernoulli title_view').html(), '確率計算ツール', '?bernoulli&' + bernoulli_encode());
 };
 
 bernoulli_switch = function(arg = null) {

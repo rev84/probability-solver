@@ -19,6 +19,7 @@ switch_mode = (arg)->
 
 bernoulli_decode = (arg)->
   [c1, c1_p, c1_fm, c1_fc, try_count, c2, c2_p, c2_f, c3_p, c3_f, title] = arg.split('_')
+  title = decodeURIComponent(title)
   $('#bernoulli select.cond1').val(if c1 is 'p' then 'prob' else 'freq')
   $('#bernoulli select.cond2').val(if c2 is 'p' then 'prob' else 'freq')
   $('#bernoulli select.cond3.prob').val(if c3_p is 'd' then 'down' else if c3_p is 'u' then 'up' else 'just')
@@ -48,7 +49,7 @@ bernoulli_encode = ->
   res.join('_')
 
 bernoulli_tweet = ->
-  tweet $('#bernoulli title_view').val(), '確率計算ツール', '?bernoulli&'+bernoulli_encode()
+  tweet $('#bernoulli title_view').html(), '確率計算ツール', '?bernoulli&'+bernoulli_encode()
 
 bernoulli_switch = (arg = null)->
   $('#switch_active').html('●回以上起こる確率')
