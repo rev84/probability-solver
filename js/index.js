@@ -59,7 +59,7 @@ bernoulli_encode = function() {
 };
 
 bernoulli_tweet = function() {
-  return tweet($('#bernoulli title_view').html(), '確率計算ツール', '?bernoulli&' + bernoulli_encode());
+  return tweet($('#bernoulli .title_view').html(), '確率計算ツール', '?bernoulli&' + bernoulli_encode());
 };
 
 bernoulli_switch = function(arg = null) {

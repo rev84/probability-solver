@@ -49,7 +49,7 @@ bernoulli_encode = ->
   res.join('_')
 
 bernoulli_tweet = ->
-  tweet $('#bernoulli title_view').html(), '確率計算ツール', '?bernoulli&'+bernoulli_encode()
+  tweet $('#bernoulli .title_view').html(), '確率計算ツール', '?bernoulli&'+bernoulli_encode()
 
 bernoulli_switch = (arg = null)->
   $('#switch_active').html('●回以上起こる確率')
