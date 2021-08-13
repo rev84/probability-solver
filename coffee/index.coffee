@@ -81,7 +81,7 @@ bernoulli_init = ->
   bernoulli_title_save()
 
 bernoulli_title_edit = ->
-  $('#bernoulli .title_input').val $('#bernoulli title_view').val()
+  $('#bernoulli .title_input').val $('#bernoulli .title_view').val()
   $('#bernoulli .title_view').addClass('no_display')
   $('#bernoulli .title_input').removeClass('no_display')
   $('#bernoulli .title_save').removeClass('no_display')
